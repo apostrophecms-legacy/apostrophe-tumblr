@@ -1,0 +1,11 @@
+{% if item._failed %}
+  <div class="apos-flickr-error">Flickr Gallery not available.</div>
+{% else %}
+  <ul class="apos-flickr-set-gallery">
+    {% for photo in item._photos %}
+      <li class="apos-flickr-set-photo">
+        <img src="{{photo}}">
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

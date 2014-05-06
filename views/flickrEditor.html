@@ -1,0 +1,41 @@
+{% extends "baseWidgetEditor.html" %}
+{% include "formMacros.html" %}
+
+{% block widgetVars %}
+  {% set widgetClass = 'apos-flickr-editor apos-ui' %}
+{% endblock %}
+
+{% block title %}
+  Select Flickr Set
+{% endblock %}
+
+{% block instructions %}
+  Paste a URL for your Flickr Set.<br/>
+  <em>Ex: "https://www.flickr.com/photos/[USER_NAME]/sets/[SET_ID]/"</em>
+{% endblock %}
+
+{% block formBody %}
+
+  <fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-flickr-set" data-name="flickrSet">
+    <label>Set URL</label>
+    <input name="set" type="text" class="apos-flickr-set">
+  </fieldset>
+
+  {{ formSelect('limit', 'Number of Photos:', [{value:1, label:"1"}, {value:5, label:"5"}, {value:10, label:"10"}, {value:20, label:"20"}] )}}
+
+
+{#   <fieldset class="apos-fieldset apos-fieldset-select apos-fieldset-flickr-limit" data-name="flickrLimit">
+    <label>Limit</label>
+    <div class="apos-select-wrapper">
+      <select name="limit" data-lister>
+        <option>1</option>
+        <option>3</option>
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+      </select>
+      <div class="apos-select-arrow"></div>
+    </div>
+  </fieldset> #}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{
+  "name": "apostrophe-tumblr",
+  "version": "0.5.0",
+  "description": "Adds a Tumblr RSS widget to the Apostrophe content management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/punkave/apostrophe-tumblr.git"
+  },
+  "keywords": [
+    "apostrophe",
+    "tumblr",
+    "RSS",
+    "widget"
+  ],
+  "author": "P'unk Avenue punkave.com",
+  "license": "MIT",
+  "dependencies": {
+    "feedparser": "~0.11.0",
+    "extend": "~1.1.3",
+    "lodash": "^2.4.1",
+  },
+  "devDependencies": {}
+}
