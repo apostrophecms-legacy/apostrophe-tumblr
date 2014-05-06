@@ -1,0 +1,16 @@
+{% if item._failed %}
+  <div class="apos-flickr-error">Flickr Gallery not available.</div>
+{% else %}
+  <ul class="apos-flickr-set-gallery">
+    {% for entry in item._entries %}
+      <li>
+        {# Here's a basic template for grabbing some posts #}
+        <h4><a href="{{entry.link}}" target="blank">{{entry.title}}</h4>
+        <h5>{{entry.date}}</h5>
+        <div>
+          {{entry.body}}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

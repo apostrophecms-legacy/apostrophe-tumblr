@@ -1,52 +1,53 @@
-// @class Editor for Flickr Set widgets
+// @class Editor for Tumblr widgets
 
-function AposFlickrWidgetEditor(options) {
+function AposTumblrWidgetEditor(options) {
   var self = this;
 
   if (!options.messages) {
     options.messages = {};
   }
   if (!options.messages.missing) {
-    options.messages.missing = 'Paste in a URL for your Flickr set first.';
+    options.messages.missing = 'Paste in a URL for your Tumblr first.';
   }
   if (!options.messages.incorrect) {
-    options.messages.incorrect = 'The URL that you pasted is not a Flick Set URL.';
+    options.messages.incorrect = 'The URL that you pasted is not a valid Tumblr.';
   }
 
-  self.type = 'flickr';
-  options.template = '.apos-flickr-editor';
+  self.type = 'tumblr';
+  options.template = '.apos-tumblr-editor';
 
   AposWidgetEditor.call(self, options);
 
   // What are these doing?
-  self.preSave = getSet;
+  self.preSave = getPosts;
 
   self.afterCreatingEl = function() {
-    self.$setUrl = self.$el.find('[name="set"]');
-    self.$setUrl.val(self.data.setUrl);
-    self.$limit = self.$el.find('[name="limit"]');
+    self.$url = self.$el.find('[name="tumblrUrl"]');
+    self.$url.val(self.data.url);
+    self.$limit = self.$el.find('[name="tumblrLimit"]');
+    // N.B. Tumblr has a set limit of 10 posts on their RSS feed.
+    // We live in a world of useful constraints. --Joel
     self.$limit.val(self.data.limit || 10);
     setTimeout(function() {
-      self.$setUrl.focus();
-      self.$setUrl.setSelection(0, 0);
+      self.$url.focus();
+      self.$url.setSelection(0, 0);
     }, 500);
   };
 
-  console.log(self);
 
-  function getSet(callback) {
-    self.exists = !!self.$setUrl.val();
+  function getPosts(callback) {
+    self.exists = !!self.$url.val();
     if (self.exists) {
-      self.data.setUrl = self.$setUrl.val();
+      self.data.url = self.$url.val();
       self.data.limit = self.$limit.val();
     }
-    if (!self.$setUrl.val().match(/sets\/([0-9]+)/)) {
+    if (!self.$url.val().match(/tumblr.com/)) {
       return alert(options.messages.incorrect);
     }
     return callback();
   }
 }
 
-AposFlickrWidgetEditor.label = 'Flickr Gallery';
+AposTumblrWidgetEditor.label = 'Tumblr Feed';
 
-apos.addWidgetType('flickr');
+apos.addWidgetType('tumblr');
