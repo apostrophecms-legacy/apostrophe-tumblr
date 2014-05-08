@@ -7,6 +7,7 @@ apostrophe-tumblr is a widget for the [Apostrophe](http://github.com/punkave/apo
 ## TO-DO
 - [x] Build it
 - [x] Publish to NPM
+- [ ] Switch loader logic to browser-side player (like Twitter)
 - [ ] Build some nice basic styles
 - [ ] Write some tests?
 
