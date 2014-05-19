@@ -72,6 +72,7 @@ function Construct(options, callback) {
 
       // map is native in node
       item._entries = articles.map(function(article) {
+
         return {
           title: article.title,
           body: article.description,
