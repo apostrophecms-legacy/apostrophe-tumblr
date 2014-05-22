@@ -1,6 +1,6 @@
 {
   "name": "apostrophe-tumblr",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Adds a Tumblr RSS widget to the Apostrophe content management system",
   "main": "index.js",
   "scripts": {
