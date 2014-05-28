@@ -37,7 +37,7 @@ function Construct(options, callback) {
   self.widget = true;
   self.label = options.label || 'Tumblr Feed';
   self.css = options.css || 'tumblr';
-  self.icon = options.icon || 'tumblr';
+  self.icon = options.icon || 'icon-tumblr';
 
   self.sanitize = function(item) {
     if (!item.url.match(/^https?\:\/\//)) {
