@@ -64,6 +64,11 @@ function Construct(options, callback) {
       return callback();
     }
 
+    if (self._apos._aposLocals.offline) {
+      item._failed = true;
+      return callback(null);
+    }
+
     // N.B. Tumblr has a set limit of 10 posts on their RSS feed.
     // We live in a world of useful constraints. --Joel
 
