@@ -1,16 +1,16 @@
 {% extends "baseWidgetEditor.html" %}
 {% include "formMacros.html" %}
 
-{% block widgetVars %}
-  {% set widgetClass = 'apos-tumblr-editor apos-ui' %}
+{% block modalClass %}
+  {{ super() }} apos-tumblr-editor
+{% endblock%}
+
+{% block modalLabel %}
+    {{ __('Select Flickr Set') }}
 {% endblock %}
 
-{% block title %}
-  Select Flickr Set
-{% endblock %}
-
-{% block instructions %}
-  Enter your Tumblr's URL below.
+{% block modalInstructions %}
+  <p>{{ __("Enter your Tumblr's URL below.") }}</p>
 {% endblock %}
 
 {% block formBody %}
