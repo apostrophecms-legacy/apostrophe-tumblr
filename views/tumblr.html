@@ -1,16 +1,14 @@
 {% if item._failed %}
   <div class="apos-flickr-error">Flickr Gallery not available.</div>
 {% else %}
-  <ul class="apos-flickr-set-gallery">
-    {% for entry in item._entries %}
-      <li>
-        {# Here's a basic template for grabbing some posts #}
-        <h4><a href="{{entry.link}}" target="blank">{{entry.title}}</h4>
-        <h5>{{entry.date}}</h5>
-        <div>
-          {{entry.body}}
-        </div>
-      </li>
-    {% endfor %}
+  <ul class="apos-flickr-set-gallery" data-apos-tumblr-posts>
+    <li data-apos-tumblr-post data-template>
+      {# Here's a basic template for grabbing some posts #}
+      <a href="" target="blank" data-apos-tumblr-link>
+        <h4 data-apos-tumblr-title></h4>
+      </a>
+      <h5 data-apos-tumblr-date></h5>
+      <div data-apos-tumblr-body></div>
+    </li>
   </ul>
 {% endif %}

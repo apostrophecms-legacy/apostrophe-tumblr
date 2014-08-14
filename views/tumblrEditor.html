@@ -20,7 +20,9 @@
     <input name="tumblrUrl" type="text" class="apos-tumblr-url">
   </fieldset>
 
-  {{ formSelect('tumblrLimit', 'Number of Posts:', [{value:1, label:"1"}, {value:5, label:"5"}, {value:10, label:"10"}] )}}
-
+  <fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-apos-tumblr-limit" data-name="tumblrLimit">
+    <label>Number of Posts:</label>
+    <input name="tumblrLimit" type="text" class="apos-input-narrow">
+  </fieldset>
 
 {% endblock %}

@@ -32,6 +32,7 @@ function Construct(options, callback) {
   // We need the editor for RSS feeds. (TODO: consider separate script lists for
   // resources needed also by non-editing users.)
   self.pushAsset('script', 'editor', { when: 'user' });
+  self.pushAsset('script', 'content', { when: 'always' });
   self.pushAsset('stylesheet', 'content', { when: 'always' });
 
   self.widget = true;
@@ -39,38 +40,42 @@ function Construct(options, callback) {
   self.css = options.css || 'tumblr';
   self.icon = options.icon || 'icon-tumblr';
 
-  self.sanitize = function(item) {
-    if (!item.url.match(/^https?\:\/\//)) {
-      item.url = 'http://' + item.url;
+  var sanitizeUrl = function(url) {
+    if (!url.match(/^https?\:\/\//)) {
+      url = 'http://' + url;
     }
-    item.limit = parseInt(item.limit, 10);
+    return url;
+
   };
+
+  var sanitizeLimit = function(limit){
+    return parseInt(limit, 10);
+  }
 
   self.renderWidget = function(data) {
     return self.render('tumblr', data);
   };
 
-  self.load = function(req, item, callback) {
-
-
+  app.get('/apos-tumblr/feed', function(req, res){
+    var item = {};
+    item.url = sanitizeUrl(req.query.url);
+    item.limit = sanitizeLimit(req.query.limit);
     item._entries = [];
 
+    // Caching
     var now = new Date();
     // Take all properties into account, not just the feed, so the cache
     // doesn't prevent us from seeing a change in the limit property right away
     var key = JSON.stringify({ feed: item.url, limit: item.limit });
     if (cache.hasOwnProperty(key) && ((cache[key].when + lifetime) > now.getTime())) {
       item._entries = cache[key].data;
-      return callback();
+      return res.json(item._entries)
     }
 
     if (self._apos._aposLocals.offline) {
       item._failed = true;
-      return callback(null);
+      return res.send(404);
     }
-
-    // N.B. Tumblr has a set limit of 10 posts on their RSS feed.
-    // We live in a world of useful constraints. --Joel
 
     feedparser.parseUrl(item.url+'/rss').on('complete', function(meta, articles) {
       articles = articles.slice(0, item.limit);
@@ -87,12 +92,12 @@ function Construct(options, callback) {
       });
       // Cache for fast access later
       cache[key] = { when: now.getTime(), data: item._entries };
-      return callback();
+      res.send(item._entries);
     }).on('error', function(error) {
       item._failed = true;
-      return callback();
+      return res.send(404, error);
     });
-  };
+  });
 
   self._apos.addWidgetType('tumblr', self);
 
