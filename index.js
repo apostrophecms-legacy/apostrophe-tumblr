@@ -42,7 +42,7 @@ function Construct(options, callback) {
 
   var sanitizeUrl = function(url) {
     if (!url.match(/^https?\:\/\//)) {
-      url = 'http://' + url;
+      url = 'https://' + url;
     }
     return url;
 
@@ -77,12 +77,16 @@ function Construct(options, callback) {
       return res.send(404);
     }
 
+    // Worth doing, but tumblr will redirect us right back to http: ):
+    item.url = item.url.replace(/^http\:/, 'https:');
+
     feedparser.parseUrl(item.url+'/rss').on('complete', function(meta, articles) {
       articles = articles.slice(0, item.limit);
 
       // map is native in node
       item._entries = articles.map(function(article) {
-
+        // Force HTTPS, tumblr's images and videos will work that way
+        article.description = article.description.replace(/src="http\:(.*?)"/g, 'src="https\:$1"');
         return {
           title: article.title,
           body: article.description,
