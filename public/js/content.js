@@ -87,6 +87,7 @@ apos.widgetPlayers.tumblr = function($el) {
 
           //Add Body
           if(post.body){
+            console.log(post.body);
             $post.$body.html(post.body);
           } else {
             $post.$body.remove();
