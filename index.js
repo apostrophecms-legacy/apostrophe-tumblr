@@ -86,7 +86,7 @@ function Construct(options, callback) {
       // map is native in node
       item._entries = articles.map(function(article) {
         // Force HTTPS, tumblr's images and videos will work that way
-        article.description = article.description.replace(/src="http\:(.*?)"/g, 'src="https\:$1"');
+        article.description = article.description.replace(/(src|poster)="http\:(.*?)"/g, 'src="https\:$2"');
         return {
           title: article.title,
           body: article.description,

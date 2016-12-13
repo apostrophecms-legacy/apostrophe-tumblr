@@ -4,7 +4,7 @@ apos.widgetPlayers.tumblr = function($el) {
 
   var sanitizeUrl = function(url) {
     if (!url.match(/^https?\:\/\//)) {
-      url = 'http://' + url;
+      url = 'https://' + url;
     }
     return url;
   };
