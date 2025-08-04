@@ -1,3 +1,7 @@
+# ⛔️ **DEPRECATED** — do not use for new projects
+
+See [our current docs](https://docs.apostrophecms.org/)
+
 # apostrophe-tumblr
 [![NPM](https://nodei.co/npm/apostrophe-tumblr.png?downloads=true&stars=true)](https://nodei.co/npm/apostrophe-tumblr/)
 
